@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+	# -*- coding: utf-8 -*-
 
 import os
 import time
@@ -35,7 +35,7 @@ text = ret.read()
 dpi = re.search('(\d+)dpi',text)
 dpiNum = int(dpi.group(1))
 alpha = dpiNum / 240
-params = re.search('init=(\d+ )x(\d+)',text)
+params = re.search('init=(\d+)x(\d+)',text)
 width = int(params.group(1))
 height = int(params.group(2))
 
