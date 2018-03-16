@@ -15,8 +15,9 @@ def adb_exe(cmd,sleep=2):
 		time.sleep(sleep)
 	wrapper(cmd,sleep)
 
-#获得链接的手机
+
 class Device():
+	''' Device 类 传入serinum '''
 
 	#添加好友的btn 颜色
 	addBtnColor = (26 , 173 , 25 , 255)
@@ -147,14 +148,20 @@ class Device():
 			self.simu_loc(i['lat'],i['long'])
 			#进入添加好友
 			self.add_before()
+			#有缓存 重新来一次
+			self.adb_back()
+			self.adb_tap(240 * self.alpha,622 * self.alpha)
+			#多等几秒
+			time.sleep(5)
 			#添加好友
-			for _ in range(2):
+			for _ in range(1):
 				self.add_first_one()
 				self.scroll_to_next()
 			#返回微信主界面
 			self.add_after()
 			#停止模拟位置
 			self.simu_loc_after()
+
 
 
 if __name__ == '__main__':
