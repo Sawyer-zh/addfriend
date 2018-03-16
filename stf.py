@@ -81,7 +81,7 @@ class Device():
 		''' 停止模拟 '''
 		#打开天下游
 		adb_exe('adb -s %s shell am start com.txy.anywhere/com.txy.anywhere.activity.SplashActivity' % self.s)
-		adb_tap(240 * self.alpha,305 * self.alpha)
+		self.adb_tap(240 * self.alpha,305 * self.alpha)
 	
 	
 	def add_before(self):
