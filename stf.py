@@ -25,6 +25,7 @@ class Device():
 		self.s = s
 		(self.alpha,self.width,self.height,self.dpiNum) = self.adb_metric()
 
+
 	#测试手机dpi = 240dpi
 	#获得屏幕尺寸 / 像素密度
 	def adb_metric(self):
@@ -106,9 +107,9 @@ class Device():
 		''' 获得打招呼按钮的btn '''
 		adb_exe('adb -s %s shell screencap -p /sdcard/tmp%s.png' % (self.s,self.s))
 		adb_exe('adb -s %s pull /sdcard/tmp%s.png' % (self.s, self.s))
-		img = Image.open('tmp.png')
+		img = Image.open('tmp%s.png' % self.s)
 		for y in range(1,self.height):
-			if addBtnColor == img.getpixel((240,self.height - y)):
+			if self.addBtnColor == img.getpixel((240,self.height - y)):
 				return self.height -y
 	
 	
