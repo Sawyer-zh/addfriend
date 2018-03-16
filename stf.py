@@ -38,6 +38,11 @@ class Device():
 		width = int(params.group(1))
 		height = int(params.group(2))
 		return (alpha ,width ,height ,dpiNum)
+
+
+	#返回
+	def adb_back(self):
+		adb_exe('adb -s %s shell input keyevent 4' % self.s) 
 			
 	
 	#封装点击
@@ -74,7 +79,7 @@ class Device():
 		#开始模拟
 		self.adb_tap(240 * self.alpha,305 * self.alpha)
 		#返回一次
-		self.add_after()
+		self.adb_back()
 	
 	
 	def simu_loc_after(self):
@@ -114,15 +119,19 @@ class Device():
 	
 	
 	def add_after(self):
-		''' 添加完成之后 返回 '''
+		''' 添加完成之后 清除位置信息 返回 '''
 		time.sleep(1)
-		adb_exe('adb -s %s shell input keyevent 4' % self.s) 
+		self.adb_tap(440 * self.alpha , 74 * self.alpha)
+		self.adb_tap(240 * self.alpha , self.height - 1)
+		time.sleep(3)
+		self.adb_back()
+		self.adb_back()
 	
 	
 	def add_first_one(self):
 		''' 添加第一个 '''
 		self.add(157.5 * self.alpha)
-		self.add_after()
+		self.adb_back()
 	
 	
 	def scroll_to_next(self):
@@ -139,7 +148,7 @@ class Device():
 			#进入添加好友
 			self.add_before()
 			#添加好友
-			for _ in range(10):
+			for _ in range(2):
 				self.add_first_one()
 				self.scroll_to_next()
 			#返回微信主界面
@@ -151,7 +160,6 @@ class Device():
 if __name__ == '__main__':
 	ret = os.popen('adb devices')
 	text = ret.read()
-	print(text)
 	s = re.findall('\w+',text)
 	devices = s[4::2]
 	for s in devices:
