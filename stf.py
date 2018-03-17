@@ -26,8 +26,7 @@ class Device():
         self.s = s
         (self.alpha, self.width, self.height, self.dpiNum) = self.adb_metric()
 
-    # 测试手机dpi = 240dpi
-    #获得屏幕尺寸 / 像素密度
+    # 测试手机dpi = 240dpi 获得屏幕尺寸 / 像素密度
     def adb_metric(self):
         ret = os.popen('adb -s %s shell dumpsys window displays' % self.s)
         text = ret.read()
@@ -134,8 +133,8 @@ class Device():
     def exe_all(self):
         # 输入经纬度信息
         f = open('./position.json', 'rb')
-        l = json.load(f)
-        for i in l:
+        positions = json.load(f)
+        for i in positions:
             # 打开模拟
             self.simu_loc(i['lat'], i['long'])
             # 进入添加好友
