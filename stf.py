@@ -6,6 +6,7 @@ import re
 from PIL import Image
 import json
 from threading import Thread
+import sys
 
 
 # 封装 执行adb
@@ -132,7 +133,7 @@ class Device():
 
     def exe_all(self):
         # 输入经纬度信息
-        f = open('./position.json', 'rb')
+        f = open(sys.path[0] +'/position.json', 'rb')
         positions = json.load(f)
         for i in positions:
             # 打开模拟
