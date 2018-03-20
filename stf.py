@@ -132,7 +132,7 @@ class Device():
 
     def exe_all(self):
         # 输入经纬度信息
-        f = open('./position.json', 'rb')
+        f = open('./position.json', 'r')
         positions = json.load(f)
         for i in positions:
             # 打开模拟
